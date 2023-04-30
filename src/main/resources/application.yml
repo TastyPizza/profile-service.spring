@@ -1,0 +1,46 @@
+server:
+  port: 21400
+  servlet:
+    context-path: /
+    session:
+      timeout: 600s
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5431/tasty_pizza
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        globally_quoted_identifiers: true
+        globally_quoted_identifiers_skip_column_definitions: true
+        format_sql: true
+  mvc:
+    format:
+      date-time: yyyy-MM-dd HH:mm:ss
+  mail:
+    host: smtp.mail.ru
+    username: tasty_pizza_itmo@mail.ru
+    password: tVryZBnvLmyfses6sqxg
+    port: 465
+    protocol: smtps
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,mappings
+        
+mail:
+  debug: true
+
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
