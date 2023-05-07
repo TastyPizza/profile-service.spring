@@ -1,0 +1,46 @@
+name: Build and deploy
+
+on:
+  # Triggers the workflow on push event but only for the "master" branch
+  push:
+    branches:
+      - master
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+          
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: temurin
+          java-version: 17
+          
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+        
+      - name: Create a jar file with Gradle Wrapper
+        run: |
+          sed -i -e 's/\r$//' ./gradlew
+          chmod +x ./gradlew
+          ./gradlew distTar
+
+      - name: Deploy to Staging server
+        uses: easingthemes/ssh-deploy@main
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SOURCE: "build/distributions/"
+          REMOTE_HOST: ${{ vars.REMOTE_HOST }}
+          REMOTE_USER: ${{ vars.REMOTE_USER }}
+          TARGET: ${{ vars.TARGET }}
+          SCRIPT_AFTER: |
+            cd ${{ vars.TARGET }}
+            tar -xvf *.tar
+            rm *.tar
