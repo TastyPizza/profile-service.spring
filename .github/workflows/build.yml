@@ -30,7 +30,7 @@ jobs:
         run: |
           sed -i -e 's/\r$//' ./gradlew
           chmod +x ./gradlew
-          ./gradlew jar
+          ./gradlew distTar
 
       - name: Deploy to Staging server
         uses: easingthemes/ssh-deploy@main
