@@ -1,14 +1,13 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
+    application
     java
     id("org.springframework.boot") version "3.0.5"
     id("io.spring.dependency-management") version "1.1.0"
-    id("io.freefair.lombok") version "5.3.0"
     kotlin("jvm") version "1.8.20"
     kotlin("plugin.spring") version "1.8.20"
     kotlin("plugin.jpa") version "1.8.20"
-    kotlin("plugin.lombok") version "1.8.20"
 }
 
 group = "ru.tasty_pizza"
@@ -37,11 +36,9 @@ dependencies {
     implementation("javax.xml.bind:jaxb-api:2.3.1")
 
     implementation("org.springframework.boot:spring-boot-starter-actuator")
-
-    compileOnly("org.projectlombok:lombok")
+    
     runtimeOnly("com.h2database:h2")
     runtimeOnly("org.postgresql:postgresql")
-    annotationProcessor("org.projectlombok:lombok")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.security:spring-security-test")
 }
@@ -55,4 +52,8 @@ tasks.withType<KotlinCompile> {
 
 tasks.withType<Test> {
     useJUnitPlatform()
+}
+
+application {
+    mainClass.set("ru/tasty_pizza/profile_service_spring/ProfileServiceSpringApplicationKT")
 }
