@@ -43,4 +43,4 @@ jobs:
           SCRIPT_AFTER: |
             cd ${{ vars.TARGET }}
             tar -xvf *.tar
-            pwd
+            rm *.tar
