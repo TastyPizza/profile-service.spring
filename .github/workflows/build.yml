@@ -23,7 +23,11 @@ jobs:
           distribution: temurin
           java-version: 17
           
-      - name: Setup and execute Gradle build
+      - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
-        with:
-          arguments: build
+        
+      - name: Run build with Gradle Wrapper
+        run: |
+          sed -i -e 's/\r$//' ./gradlew
+          chmod +x ./gradlew
+          ./gradlew build
