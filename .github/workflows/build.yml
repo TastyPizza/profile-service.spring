@@ -41,4 +41,6 @@ jobs:
           REMOTE_USER: ${{ vars.REMOTE_USER }}
           TARGET: ${{ vars.TARGET }}
           SCRIPT_AFTER: |
+            cd ${{ vars.TARGET }}
             tar -xvf *.tar
+            pwd
