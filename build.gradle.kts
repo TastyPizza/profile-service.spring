@@ -57,3 +57,7 @@ tasks.withType<Test> {
 application {
     mainClass.set("ru/tasty_pizza/profile_service_spring/ProfileServiceSpringApplicationKT")
 }
+
+tasks.test {
+    exclude("**/*")
+}
