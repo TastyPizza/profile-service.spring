@@ -6,7 +6,6 @@ import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.stereotype.Service
 import org.springframework.util.StringUtils
 import ru.tasty_pizza.profile_service_spring.dto.request.NewClient
-import ru.tasty_pizza.profile_service_spring.dto.response.AuthResponse
 import ru.tasty_pizza.profile_service_spring.dto.response.VerificationResponse
 import ru.tasty_pizza.profile_service_spring.security.JwtTokenProvider
 
@@ -15,15 +14,9 @@ class AuthService (
     private val clientService: ClientService,
     private val tokenProvider: JwtTokenProvider
 ) {
-    fun signIn(email: String): ResponseEntity<AuthResponse> {
-        
-        return clientService.sendVerificationCode(email)
-    }
-
-    fun signUp(newClient: NewClient): ResponseEntity<AuthResponse> {
-        
-        return clientService.createClient(newClient)
-    }
+    fun signIn(email: String) = clientService.sendVerificationCode(email)
+    fun signUp(newClient: NewClient) = clientService.createClient(newClient)
+    
 
     fun verify(verificationCode: String): ResponseEntity<VerificationResponse>  {
         val email = SecurityContextHolder.getContext().authentication.name

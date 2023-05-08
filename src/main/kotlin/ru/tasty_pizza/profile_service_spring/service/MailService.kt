@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.mail.MailSendException
 import org.springframework.mail.javamail.JavaMailSender
 import org.springframework.mail.javamail.MimeMessageHelper
 import org.springframework.scheduling.annotation.Async
@@ -51,6 +52,9 @@ class MailService (
             )*/
             SecurityContextHolder.getContext().authentication.isAuthenticated = true
             
+        } catch (e: MailSendException) {
+            result = ResponseEntity(AuthResponse(errorMessage = "Несуществуюший адрес почты"), HttpStatus.BAD_REQUEST)
+            log.error("Failed to send email to $email, due to: ${e.message}")
         } catch (e: MessagingException) {
             result = ResponseEntity(AuthResponse(errorMessage = e.message), HttpStatus.INTERNAL_SERVER_ERROR)
             log.error("Failed to send email to $email, due to: ${e.message}")

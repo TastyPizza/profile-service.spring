@@ -26,7 +26,7 @@ class ClientService(
     fun createClient(clientRequest: NewClient): ResponseEntity<AuthResponse> {
         if (isUserPresent(clientRequest.email)){
             return ResponseEntity<AuthResponse>(
-                AuthResponse(errorMessage = "Пользователь уже существует"),
+                AuthResponse(errorMessage = "Пользователь с почтой ${clientRequest.email} уже существует"),
                 HttpStatus.CONFLICT
             )
         }
