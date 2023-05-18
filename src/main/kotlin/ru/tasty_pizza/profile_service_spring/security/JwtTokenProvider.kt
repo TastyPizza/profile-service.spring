@@ -15,10 +15,10 @@ class JwtTokenProvider (
 ) {
 
     private val log = LoggerFactory.getLogger(this.javaClass)
-
-    private fun generateToken(login: String,
-                      claims: MutableMap<String, Any>? = null,
-                      expirationDate: Date = Date.from(Instant.now().plus(7, ChronoUnit.DAYS))
+    private fun generateToken(
+        login: String,
+        claims: MutableMap<String, Any>? = null,
+        expirationDate: Date = Date.from(Instant.now().plus(7, ChronoUnit.DAYS))
     ): String {
         
         return Jwts.builder()

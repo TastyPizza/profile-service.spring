@@ -50,7 +50,7 @@ class MailService (
                     setOf(SimpleGrantedAuthority("ROLE_UNVERIFIED_CLIENT"))
                 )
             )*/
-            SecurityContextHolder.getContext().authentication.isAuthenticated = true
+            SecurityContextHolder.getContext().authentication.isAuthenticated = true //todo исправь IllegalArgumentException: Cannot set this token to trusted - use constructor which takes a GrantedAuthority list instead] with root cause
             
         } catch (e: MailSendException) {
             result = ResponseEntity(AuthResponse(errorMessage = "Несуществуюший адрес почты"), HttpStatus.BAD_REQUEST)

@@ -35,7 +35,6 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("io.jsonwebtoken:jjwt:0.9.1")
     implementation("javax.xml.bind:jaxb-api:2.3.1")
-
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     
     runtimeOnly("com.h2database:h2")
@@ -53,12 +52,4 @@ tasks.withType<KotlinCompile> {
 
 tasks.withType<Test> {
     useJUnitPlatform()
-}
-
-application {
-    mainClass.set("ru/tasty_pizza/profile_service_spring/ProfileServiceSpringApplicationKT")
-}
-
-tasks.test {
-    exclude("**/*")
 }

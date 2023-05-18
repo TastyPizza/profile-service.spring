@@ -92,7 +92,7 @@ class SecurityConfig (
                 .requestMatchers("/profile/**")
                 .hasAuthority("ROLE_VERIFIED_CLIENT")
                 
-                .requestMatchers("*")
+                .anyRequest()
                 .permitAll()
             .and()
             .build()
