@@ -30,17 +30,17 @@ jobs:
         run: |
           sed -i -e 's/\r$//' ./gradlew
           chmod +x ./gradlew
-          ./gradlew distTar
+          ./gradlew bootJar
 
-      - name: Deploy to Staging server
-        uses: easingthemes/ssh-deploy@main
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          SOURCE: "build/distributions/"
-          REMOTE_HOST: ${{ vars.REMOTE_HOST }}
-          REMOTE_USER: ${{ vars.REMOTE_USER }}
-          TARGET: ${{ vars.TARGET }}
-          SCRIPT_AFTER: |
-            cd ${{ vars.TARGET }}
-            tar -xvf *.tar
-            rm *.tar
+#      - name: Deploy to Staging server
+#        uses: easingthemes/ssh-deploy@main
+#        env:
+#          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+#          SOURCE: "build/distributions/"
+#          REMOTE_HOST: ${{ vars.REMOTE_HOST }}
+#          REMOTE_USER: ${{ vars.REMOTE_USER }}
+#          TARGET: ${{ vars.TARGET }}
+#          SCRIPT_AFTER: |
+#            cd ${{ vars.TARGET }}
+#            tar -xvf *.tar
+#            rm *.tar

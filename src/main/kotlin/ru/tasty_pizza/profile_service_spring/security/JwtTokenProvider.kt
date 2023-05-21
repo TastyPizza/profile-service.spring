@@ -45,7 +45,7 @@ class JwtTokenProvider (
         claims["tokenType"] = "refresh"
         claims["role"] = "ROLE_VERIFIED_CLIENT"
 
-        return "Bearer " + generateToken(login, claims, expirationDate)
+        return generateToken(login, claims, expirationDate)
     }
 
     fun generateReadyToGetVerifiedToken(login: String): String {

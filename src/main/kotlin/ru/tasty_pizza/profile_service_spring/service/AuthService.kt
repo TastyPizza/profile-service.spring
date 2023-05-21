@@ -44,7 +44,7 @@ class AuthService (
             tokenProvider.validateToken(id) &&
             tokenProvider.getTokenType(id) == "refresh"
         ){
-            val email = SecurityContextHolder.getContext().authentication.name
+            val email = tokenProvider.getUserLoginFromToken(id)
             val response = VerificationResponse(
                 tokenProvider.generateAccessToken(email),
                 tokenProvider.generateRefreshToken(email)
