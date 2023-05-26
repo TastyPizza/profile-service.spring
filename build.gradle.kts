@@ -20,9 +20,13 @@ configurations {
     }
 }
 
+
 repositories {
     mavenCentral()
+    maven { url = uri("https://artifactory-oss.prod.netflix.net/artifactory/maven-oss-candidates") }
 }
+
+extra["springCloudVersion"] = "2022.0.2"
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-rest")
@@ -36,11 +40,18 @@ dependencies {
     implementation("io.jsonwebtoken:jjwt:0.9.1")
     implementation("javax.xml.bind:jaxb-api:2.3.1")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
-    
+
     runtimeOnly("com.h2database:h2")
     runtimeOnly("org.postgresql:postgresql")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.security:spring-security-test")
+    implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
+}
+
+dependencyManagement {
+    imports {
+        mavenBom("org.springframework.cloud:spring-cloud-dependencies:${property("springCloudVersion")}")
+    }
 }
 
 tasks.withType<KotlinCompile> {
