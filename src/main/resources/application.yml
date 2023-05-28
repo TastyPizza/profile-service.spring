@@ -5,7 +5,25 @@ server:
     session:
       timeout: 600s
 
+app:
+  exchange: tasty_pizza
+  routing-key: public-key
+  queue: public-key
+
 spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: rabbit
+    password: rabbit
+
+  data:
+    redis:
+      database: 0
+      host: localhost
+      port: 6379
+      password: apigateway
+      timeout: 60000
   application:
     name: profile
   datasource:

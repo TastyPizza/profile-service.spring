@@ -20,7 +20,6 @@ configurations {
     }
 }
 
-
 repositories {
     mavenCentral()
     maven { url = uri("https://artifactory-oss.prod.netflix.net/artifactory/maven-oss-candidates") }
@@ -29,12 +28,14 @@ repositories {
 extra["springCloudVersion"] = "2022.0.2"
 
 dependencies {
+    implementation("org.springframework.boot:spring-boot-starter-data-redis")
     implementation("org.springframework.boot:spring-boot-starter-data-rest")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springframework.boot:spring-boot-starter-mail")
     implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-amqp")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("io.jsonwebtoken:jjwt:0.9.1")
