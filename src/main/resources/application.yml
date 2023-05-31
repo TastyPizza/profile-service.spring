@@ -16,14 +16,6 @@ spring:
     port: 5672
     username: rabbit
     password: rabbit
-
-  data:
-    redis:
-      database: 0
-      host: localhost
-      port: 6379
-      password: apigateway
-      timeout: 60000
   application:
     name: profile
   datasource:
@@ -69,5 +61,5 @@ logging:
 
 eureka:
   client:
-    service-url:
+    serviceUrl:
       defaultZone: http://localhost:8761/eureka
